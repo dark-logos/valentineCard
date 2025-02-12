@@ -70,6 +70,11 @@
     </style>
 </head>
 <body>
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+    
     <div class="slider" onclick="nextSlide()">
         <div class="slide active"><div class="krishna" style="background-image: url('krishna1.gif');"></div>С Днём Святого Валентина!</div>
         <div class="slide"><div class="krishna" style="background-image: url('krishna2.gif');"></div>Ты - моё счастье ❤️</div>
@@ -94,6 +99,7 @@
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
+        const audio = document.getElementById('bg-music');
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -103,6 +109,9 @@
         }
         
         function nextSlide() {
+            if (currentSlide === 0) {
+                audio.play().catch(error => console.log('Автозапуск музыки запрещен браузером'));
+            }
             currentSlide = (currentSlide + 1) % slides.length;
             showSlide(currentSlide);
         }
@@ -111,3 +120,4 @@
     </script>
 </body>
 </html>
+
