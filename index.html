@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Валентинка">
+    <link rel="apple-touch-icon" href="icon.png">
+    <title>Валентинка</title>
+    <style>
+        body {
+            background-color: #3B2F2F;
+            color: #E3DAC9;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            overflow: hidden;
+        }
+        .slider {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide {
+            position: absolute;
+            width: 80%;
+            height: 60%;
+            background: #1E4D4F;
+            color: #E3DAC9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 1s;
+            visibility: hidden;
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .button {
+            background: #E3DAC9;
+            color: #3B2F2F;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .audio-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #E3DAC9;
+            color: #3B2F2F;
+            padding: 10px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+    <button class="audio-button" onclick="toggleMusic()">🔊</button>
+    
+    <div class="slider">
+        <div class="slide active">С Днём Святого Валентина!</div>
+        <div class="slide">Ты самое дорогое, что у меня есть ❤️</div>
+        <div class="slide">Пусть наша любовь будет вечной 🌊</div>
+    </div>
+    <div class="controls">
+        <button class="button" onclick="prevSlide()">Назад</button>
+        <button class="button" onclick="nextSlide()">Вперёд</button>
+    </div>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const audio = document.getElementById("background-music");
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+            });
+            slides[index].classList.add('active');
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+        
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+        
+        showSlide(currentSlide);
+        
+        document.addEventListener("click", function() {
+            if (audio.paused) {
+                audio.play();
+            }
+        }, { once: true });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if (navigator.userAgent.includes("FBAN") || navigator.userAgent.includes("FBAV") || navigator.userAgent.includes("Instagram")) {
+                window.location.href = "safari://" + window.location.href;
+                setTimeout(function() {
+                    alert("Откройте эту страницу в Safari для правильной работы.");
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
+
