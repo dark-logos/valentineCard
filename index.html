@@ -10,13 +10,15 @@
     <title>Валентинка</title>
     <style>
         body {
-            background-color: #3B2F2F;
+            background: white;
             color: #E3DAC9;
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
             overflow: hidden;
+            position: relative;
         }
+
         .slider {
             position: relative;
             width: 100vw;
@@ -25,18 +27,15 @@
             justify-content: center;
             align-items: center;
         }
+
         .slide {
             position: absolute;
-            width: 80%;
-            height: 60%;
-            background: #1E4D4F;
-            color: #E3DAC9;
+            width: 100vw;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 2em;
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
             opacity: 0;
             transition: opacity 1s;
             visibility: hidden;
@@ -45,54 +44,56 @@
             opacity: 1;
             visibility: visible;
         }
-        .controls {
+
+        .krishna {
             position: absolute;
-            bottom: 20px;
-            display: flex;
-            gap: 20px;
+            width: 200px;
+            height: 200px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
         }
-        .button {
-            background: #E3DAC9;
-            color: #3B2F2F;
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            font-size: 1em;
-        }
-        .audio-button {
+
+        .cat {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #E3DAC9;
-            color: #3B2F2F;
-            padding: 10px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2em;
+            width: 100px;
+            height: 100px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: float 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-20px); }
         }
     </style>
 </head>
 <body>
-    <audio id="background-music" loop>
-        <source src="forSofa.mp3" type="audio/mpeg">
-    </audio>
-    <button class="audio-button" onclick="toggleMusic()">🔊</button>
-    
-    <div class="slider">
-        <div class="slide active">С Днём Святого Валентина!</div>
-        <div class="slide">Ты самое дорогое, что у меня есть ❤️</div>
-        <div class="slide">Пусть наша любовь будет вечной 🌊</div>
+    <div class="slider" onclick="nextSlide()">
+        <div class="slide active"><div class="krishna" style="background-image: url('krishna1.gif');"></div>С Днём Святого Валентина!</div>
+        <div class="slide"><div class="krishna" style="background-image: url('krishna2.gif');"></div>Ты - моё счастье ❤️</div>
+        <div class="slide"><div class="krishna" style="background-image: url('krishna3.gif');"></div>Каждый день с тобой - волшебство ✨</div>
+        <div class="slide">Ты - моя вселенная 🌍
+            <div class="cat" style="top: 5%; left: 10%; background-image: url('cat1.gif');"></div>
+            <div class="cat" style="top: 15%; left: 80%; background-image: url('cat2.gif');"></div>
+            <div class="cat" style="top: 40%; left: 20%; background-image: url('cat3.gif');"></div>
+            <div class="cat" style="top: 60%; left: 70%; background-image: url('cat4.gif');"></div>
+            <div class="cat" style="top: 75%; left: 30%; background-image: url('cat5.gif');"></div>
+            <div class="cat" style="top: 85%; left: 85%; background-image: url('cat6.gif');"></div>
+            <div class="cat" style="top: 25%; left: 50%; background-image: url('cat7.gif');"></div>
+            <div class="cat" style="top: 50%; left: 5%; background-image: url('cat8.gif');"></div>
+            <div class="cat" style="top: 90%; left: 60%; background-image: url('cat9.gif');"></div>
+        </div>
+        <div class="slide">Я благодарен(а) за тебя 💖</div>
+        <div class="slide">Ты - моя мечта, ставшая реальностью 🌠</div>
+        <div class="slide">Наша любовь - самое ценное, что у меня есть 💞</div>
+        <div class="slide">С тобой всегда тепло и уютно ❤️</div>
     </div>
-    <div class="controls">
-        <button class="button" onclick="prevSlide()">Назад</button>
-        <button class="button" onclick="nextSlide()">Вперёд</button>
-    </div>
+
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        const audio = document.getElementById("background-music");
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -106,35 +107,7 @@
             showSlide(currentSlide);
         }
         
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
-        }
-        
-        function toggleMusic() {
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-        }
-        
         showSlide(currentSlide);
-        
-        document.addEventListener("click", function() {
-            if (audio.paused) {
-                audio.play();
-            }
-        }, { once: true });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            if (navigator.userAgent.includes("FBAN") || navigator.userAgent.includes("FBAV") || navigator.userAgent.includes("Instagram")) {
-                window.location.href = "safari://" + window.location.href;
-                setTimeout(function() {
-                    alert("Откройте эту страницу в Safari для правильной работы.");
-                }, 1000);
-            }
-        });
     </script>
 </body>
 </html>
