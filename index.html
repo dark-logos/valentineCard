@@ -60,9 +60,26 @@
             cursor: pointer;
             font-size: 1em;
         }
+        .audio-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #E3DAC9;
+            color: #3B2F2F;
+            padding: 10px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
+    <audio id="background-music" loop>
+        <source src="forSofa.mp3" type="audio/mpeg">
+    </audio>
+    <button class="audio-button" onclick="toggleMusic()">🔊</button>
+    
     <div class="slider">
         <div class="slide active">С Днём Святого Валентина!</div>
         <div class="slide">Ты самое дорогое, что у меня есть ❤️</div>
@@ -75,7 +92,8 @@
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        
+        const audio = document.getElementById("background-music");
+
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.classList.remove('active');
@@ -93,7 +111,21 @@
             showSlide(currentSlide);
         }
         
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+        
         showSlide(currentSlide);
+        
+        document.addEventListener("click", function() {
+            if (audio.paused) {
+                audio.play();
+            }
+        }, { once: true });
 
         document.addEventListener("DOMContentLoaded", function() {
             if (navigator.userAgent.includes("FBAN") || navigator.userAgent.includes("FBAV") || navigator.userAgent.includes("Instagram")) {
@@ -106,3 +138,4 @@
     </script>
 </body>
 </html>
+
