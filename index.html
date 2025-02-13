@@ -9,6 +9,7 @@
     <link rel="apple-touch-icon" href="icon.png">
     <title>Валентинка</title>
     <style>
+        /* Общие стили */
         body {
             background: white;
             color: #E3DAC9;
@@ -33,9 +34,7 @@
             width: 100vw;
             height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2em;
+            font-size: 1.5em; /* Уменьшенный размер шрифта для мобильных */
             opacity: 0;
             transition: opacity 1s;
             visibility: hidden;
@@ -45,39 +44,66 @@
             visibility: visible;
         }
 
+        /* Слайды с гифками слева */
+        .slide:not(.right-align) {
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        /* Слайды с гифками справа */
+        .slide.right-align {
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+
         .center-image {
-            width: 50%;
+            width: 80%; /* Уменьшенный размер для мобильных */
             height: 50%;
             background-size: contain;
             background-repeat: no-repeat;
-            background-position: center;
+            background-position: left top;
         }
 
-        .cat {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            animation: float 3s ease-in-out infinite alternate;
+        /* Для слайдов с выравниванием справа */
+        .slide.right-align .center-image {
+            background-position: right bottom;
         }
 
-        .heart {
+        /* Диалоговые окна */
+        .dialog-box, .dialog-box2, .dialog-box3 {
             position: absolute;
-            width: 40px;
-            height: 40px;
-            background-image: url('heart.png');
-            background-size: contain;
+            width: 90vw; /* Ширина адаптирована для мобильных */
+            max-width: 300px; /* Уменьшенный максимальный размер */
+            height: auto;
+            background-size: 100% 100%;
             background-repeat: no-repeat;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            will-change: transform, opacity;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            box-sizing: border-box;
+            z-index: 10;
+            overflow-y: auto;
+            max-height: 80vh;
+            font-size: 0.8em; /* Уменьшенный размер шрифта */
+        }
+        .dialog-box {
+            top: 5%; /* Смещение для мобильных */
+            left: 5%;
+        }
+        .dialog-box2 {
+            top: 10%;
+            left: 10%;
+        }
+        .dialog-box3 {
+            top: 5%;
+            right: 5%;
         }
 
         /* Пиксельный текст */
         .pixel-text {
             font-family: 'Press Start 2P', cursive;
-            font-size: 9px;
+            font-size: 8px; /* Уменьшенный размер шрифта */
             color: black;
             white-space: pre-line;
             overflow: hidden;
@@ -97,46 +123,15 @@
             animation: typewriter 5s steps(60) forwards;
         }
 
-        /* Контейнер для диалогового окна */
-        .dialog-box, .dialog-box2, .dialog-box3 {
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            width: 80vw;
-            max-width: 400px;
-            height: auto;
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            box-sizing: border-box;
-            z-index: 10;
-            overflow-y: auto;
-            max-height: 80vh;
-        }
-        .dialog-box2 {
-            top: 20%;
-            left: 15%;
-            width: 80vw;
-            max-width: 450px;
-        }
-        .dialog-box3 {
-            top: 20%;
-            left: 15%;
-            width: 80vw;
-            max-width: 450px;
-        }
-
+        /* Анимации */
         @keyframes float {
             0% { transform: translateY(0px); }
-            100% { transform: translateY(-20px); }
+            100% { transform: translateY(-10px); } /* Уменьшенная амплитуда */
         }
 
         @keyframes levitateHeart {
             0% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); } /* Уменьшенная амплитуда */
             100% { transform: translateY(0); }
         }
     </style>
@@ -203,7 +198,8 @@
                 </div>
             </div>
         </div>
-        <div class="slide" onclick="nextSlide()">
+        <!-- Слайды с me.gif и dialog-box3 справа -->
+        <div class="slide right-align" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('me.gif');"></div>
             <div class="dialog-box3">
                 <div class="pixel-text">
@@ -212,7 +208,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide" onclick="nextSlide()">
+        <div class="slide right-align" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('me.gif');"></div>
             <div class="dialog-box3">
                 <div class="pixel-text">
@@ -222,7 +218,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide" onclick="nextSlide()">
+        <div class="slide right-align" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('me.gif');"></div>
             <div class="dialog-box3">
                 <div class="pixel-text">
@@ -327,4 +323,3 @@
     </script>
 </body>
 </html>
-
