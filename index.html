@@ -67,10 +67,11 @@
             position: absolute;
             width: 40px;
             height: 40px;
-            background-image: url('heart.png');
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Red_Heart.svg/1024px-Red_Heart.svg.png');
             background-size: contain;
             background-repeat: no-repeat;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
         @keyframes float {
@@ -78,9 +79,9 @@
             100% { transform: translateY(-20px); }
         }
 
-        @keyframes fall {
-            from { transform: translateY(-50px); }
-            to { transform: translateY(100vh); }
+        @keyframes move {
+            0% { transform: translateY(-50px); }
+            100% { transform: translateY(100vh); }
         }
     </style>
 </head>
@@ -115,7 +116,6 @@
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const audio = document.getElementById('bg-music');
-        let heartsCollected = 0;
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -124,7 +124,7 @@
             slides[index].classList.add('active');
 
             if (index === 4) {
-                startHeartsFalling();
+                startHeartsMoving();
             }
         }
 
@@ -132,15 +132,12 @@
             if (currentSlide === 0) {
                 audio.play().catch(error => console.log('Автозапуск музыки запрещен браузером'));
             }
-            if (currentSlide === 4 && heartsCollected < 6) return;
-
             currentSlide = (currentSlide + 1) % slides.length;
             showSlide(currentSlide);
         }
 
-        function startHeartsFalling() {
-            heartsCollected = 0;
-            for (let i = 0; i < 12; i++) {
+        function startHeartsMoving() {
+            for (let i = 0; i < 8; i++) {
                 createHeart();
             }
         }
@@ -149,21 +146,13 @@
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.style.left = Math.random() * window.innerWidth + 'px';
-            heart.style.top = '-50px';
-            heart.style.animation = `fall ${Math.random() * 4 + 3}s linear forwards`;
-
-            heart.addEventListener('click', () => {
-                heart.remove();
-                heartsCollected++;
-                if (heartsCollected >= 6) {
-                    nextSlide();
-                }
-            });
+            heart.style.top = Math.random() * window.innerHeight + 'px';
 
             document.body.appendChild(heart);
         }
     </script>
 </body>
 </html>
+
 
 
