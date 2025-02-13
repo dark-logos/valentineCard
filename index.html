@@ -71,6 +71,7 @@
             background-size: contain;
             background-repeat: no-repeat;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
         @keyframes float {
@@ -78,10 +79,10 @@
             100% { transform: translateY(-20px); }
         }
 
-        @keyframes moveHeartSideways {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(-30px); }
-            100% { transform: translateX(30px); }
+        @keyframes levitateHeart {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
         }
 
     </style>
@@ -108,7 +109,7 @@
             <div class="cat" style="top: 90%; left: 60%; background-image: url('cat9.gif');"></div>
         </div>
         <div class="slide" id="heart-slide">Собери 6 штук!</div>
-        <div class="slide" onclick="nextSlide()">Ты справилась!</div>
+        <div class="slide">Ты справилась!</div>
         <div class="slide" onclick="nextSlide()">Наша любовь - самое ценное, что у меня есть 💞</div>
         <div class="slide" onclick="nextSlide()">С тобой всегда тепло и уютно ❤️</div>
     </div>
@@ -143,30 +144,31 @@
         function startHeartsMovement() {
             collectedHearts = 0;
             const heartSlide = slides[4];
+            heartSlide.innerHTML = 'Собери 6 штук!';
             for (let i = 0; i < 8; i++) {
-                createMovingHeart(heartSlide);
+                createLevitateHeart(heartSlide);
             }
         }
 
-        function createMovingHeart(parent) {
+        function createLevitateHeart(parent) {
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.style.left = Math.random() * (window.innerWidth - 40) + 'px';
             heart.style.top = Math.random() * (window.innerHeight - 40) + 'px';
+            heart.onclick = function() {
+                heart.remove();
+                collectedHearts++;
+                if (collectedHearts >= 6) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            };
             parent.appendChild(heart);
-            heart.animate(
-                [
-                    { transform: 'translateX(0)' },
-                    { transform: 'translateX(-30px)' },
-                    { transform: 'translateX(30px)' }
-                ],
-                { duration: 3000, iterations: Infinity }
-            );
+            heart.style.animation = 'levitateHeart 3s infinite ease-in-out';
         }
     </script>
 </body>
 </html>
-
 
 
 
