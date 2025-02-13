@@ -33,8 +33,8 @@
             width: 100vw;
             height: 100vh;
             display: flex;
-            justify-content: flex-start;
-            align-items: flex-end;
+            justify-content: center;
+            align-items: center;
             font-size: 2em;
             opacity: 0;
             transition: opacity 1s;
@@ -76,14 +76,13 @@
 
         /* Пиксельный текст */
         .pixel-text {
-            font-family: 'Press Start 2P', cursive; /* Пиксельный шрифт */
-            font-size: 9px; /* Размер текста */
-            color: black; /* Черный текст */
-            /*text-shadow: 2px 2px 0 white; /* Белая тень для читаемости */
-            white-space: pre-line; /* Поддержка переноса строк */
-            overflow: hidden; /* Скрываем текст до анимации */
-            padding: 6px; /* Отступы */
-            background: transparent; /* Прозрачный фон */
+            font-family: 'Press Start 2P', cursive;
+            font-size: 9px;
+            color: black;
+            white-space: pre-line;
+            overflow: hidden;
+            padding: 6px;
+            background: transparent;
         }
 
         /* Анимация появления текста по букве */
@@ -95,67 +94,52 @@
         .typewriter {
             display: inline-block;
             overflow: hidden;
-            animation: typewriter 5s steps(60) forwards; /* Анимация на 5 секунд */
+            animation: typewriter 5s steps(60) forwards;
         }
 
         /* Контейнер для диалогового окна */
-        .dialog-box {
+        .dialog-box, .dialog-box2, .dialog-box3 {
             position: absolute;
             top: 10%;
             left: 10%;
-            width: 400px;
+            width: 80vw;
+            max-width: 400px;
             height: auto;
-            background-image: url('dialog-box.png');
-            background-size: 100% 100%; /* Растянет изображение на всю область */
+            background-size: 100% 100%;
             background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 10px;
             box-sizing: border-box;
+            z-index: 10;
+            overflow-y: auto;
+            max-height: 80vh;
         }
         .dialog-box2 {
-            position: absolute;
             top: 20%;
             left: 15%;
-            width: 450px;
-            height: auto;
-            background-image: url('dialog-box2.png'); /* Можно использовать другое изображение */
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            box-sizing: border-box;
+            width: 80vw;
+            max-width: 450px;
         }
         .dialog-box3 {
-            position: absolute;
             top: 20%;
             left: 15%;
-            width: 450px;
-            height: auto;
-            background-image: url('dialog-box3.png'); /* Можно использовать другое изображение */
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            box-sizing: border-box;
+            width: 80vw;
+            max-width: 450px;
         }
+
         @keyframes float {
             0% { transform: translateY(0px); }
-            100% { transform: translateY(-50px); } /*20*/
+            100% { transform: translateY(-20px); }
         }
 
         @keyframes levitateHeart {
             0% { transform: translateY(0); }
-            50% { transform: translateY(-45px); } /*15*/
+            50% { transform: translateY(-15px); }
             100% { transform: translateY(0); }
         }
     </style>
-    <!-- Подключаем пиксельный шрифт -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -163,7 +147,8 @@
         <source src="forSofa.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает аудио элемент.
     </audio>
-    
+    <button onclick="document.getElementById('bg-music').play()">Включить музыку</button>
+
     <div class="slider">
         <!-- Первый слайд: картинка в формате PNG -->
         <div class="slide active" onclick="nextSlide()">
@@ -211,41 +196,43 @@
                 </div>
             </div>
         </div>
-        <div class="slide" onclick="nextSlide()"><div class="dialog-box2">
-            <div class="pixel-text">
-                <div class="typewriter">Хих! Ты справилась, оставлю вас вдвоём на секундочку </div>
-            </div>
-        </div>
-    </div>
-    <div class="slide" onclick="nextSlide()">
-        <div class="center-image" style="background-image: url('me.gif');"></div>
-        <div class="dialog-box3">
-            <div class="pixel-text">
-                <div class="typewriter">Здраствуй! Моя лучезарная и ненаглядная, Софа!
+        <div class="slide" onclick="nextSlide()">
+            <div class="dialog-box2">
+                <div class="pixel-text">
+                    <div class="typewriter">Хих! Ты справилась, оставлю вас вдвоём на секундочку </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="slide" onclick="nextSlide()">
-        <div class="center-image" style="background-image: url('me.gif');"></div>
-        <div class="dialog-box3">
-            <div class="pixel-text">
-                <div class="typewriter">Вот мы с тобой уже знакомы 210 дней, вот ты уже снишься 
-                    мне почти каждый день и твой лик запечатан в моих фантазиях
+        <div class="slide" onclick="nextSlide()">
+            <div class="center-image" style="background-image: url('me.gif');"></div>
+            <div class="dialog-box3">
+                <div class="pixel-text">
+                    <div class="typewriter">Здраствуй! Моя лучезарная и ненаглядная, Софа!
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="slide" onclick="nextSlide()">
-        <div class="center-image" style="background-image: url('me.gif');"></div>
-        <div class="dialog-box3">
-            <div class="pixel-text">
-                <div class="typewriter">Бесконечно люблю тебя и мечтаю о встрече... раз о ней заговорили 
-                    не забудь нажать на кнопку внизу, до скорых встреч. xoxo
+        <div class="slide" onclick="nextSlide()">
+            <div class="center-image" style="background-image: url('me.gif');"></div>
+            <div class="dialog-box3">
+                <div class="pixel-text">
+                    <div class="typewriter">Вот мы с тобой уже знакомы 210 дней, вот ты уже снишься 
+                        мне почти каждый день и твой лик запечатан в моих фантазиях
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="slide" onclick="nextSlide()">
+            <div class="center-image" style="background-image: url('me.gif');"></div>
+            <div class="dialog-box3">
+                <div class="pixel-text">
+                    <div class="typewriter">Бесконечно люблю тебя и мечтаю о встрече... раз о ней заговорили 
+                        не забудь нажать на кнопку внизу, до скорых встреч. xoxo
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide" onclick="nextSlide()">
             <div class="dialog-box2">
                 <div class="pixel-text">
                     <div class="typewriter">Как же вы прекрасныыы! Хочу оставить ваши фотографии на память! 
@@ -280,9 +267,9 @@
         <div class="slide" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('preLast.gif');"></div>
         </div>
-            <div class="slide" onclick="nextSlide()">
-                <div class="center-image" style="background-image: url('last.gif');"></div>
-            </div>
+        <div class="slide" onclick="nextSlide()">
+            <div class="center-image" style="background-image: url('last.gif');"></div>
+        </div>
     </div>
 
     <script>
@@ -294,8 +281,10 @@
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.classList.remove('active');
+                slide.style.display = 'none';
             });
             slides[index].classList.add('active');
+            slides[index].style.display = 'flex';
 
             if (index === 4) {
                 startHeartsMovement();
@@ -313,13 +302,11 @@
         function startHeartsMovement() {
             collectedHearts = 0;
             const heartSlide = slides[4];
-            heartSlide.innerHTML = 'Коснись их всех!';
-            const fragment = document.createDocumentFragment();
+            heartSlide.innerHTML = '';
             for (let i = 0; i < 6; i++) {
                 const heart = createLevitateHeart();
-                fragment.appendChild(heart);
+                heartSlide.appendChild(heart);
             }
-            heartSlide.appendChild(fragment);
         }
 
         function createLevitateHeart() {
