@@ -34,7 +34,7 @@
             width: 100vw;
             height: 100vh;
             display: flex;
-            font-size: 1.5em; /* Уменьшенный размер шрифта для мобильных */
+            font-size: 1.5em;
             opacity: 0;
             transition: opacity 1s;
             visibility: hidden;
@@ -57,7 +57,7 @@
         }
 
         .center-image {
-            width: 80%; /* Уменьшенный размер для мобильных */
+            width: 80%;
             height: 50%;
             background-size: contain;
             background-repeat: no-repeat;
@@ -68,12 +68,22 @@
         .slide.right-align .center-image {
             background-position: right bottom;
         }
-
+        .heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-image: url('heart.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            will-change: transform, opacity;
+        }
         /* Диалоговые окна */
         .dialog-box, .dialog-box2, .dialog-box3 {
             position: absolute;
-            width: 90vw; /* Ширина адаптирована для мобильных */
-            max-width: 300px; /* Уменьшенный максимальный размер */
+            width: 90vw;
+            max-width: 300px;
             height: auto;
             background-size: 100% 100%;
             background-repeat: no-repeat;
@@ -85,10 +95,10 @@
             z-index: 10;
             overflow-y: auto;
             max-height: 80vh;
-            font-size: 0.8em; /* Уменьшенный размер шрифта */
+            font-size: 0.8em;
         }
         .dialog-box {
-            top: 5%; /* Смещение для мобильных */
+            top: 5%;
             left: 5%;
         }
         .dialog-box2 {
@@ -103,7 +113,7 @@
         /* Пиксельный текст */
         .pixel-text {
             font-family: 'Press Start 2P', cursive;
-            font-size: 8px; /* Уменьшенный размер шрифта */
+            font-size: 8px;
             color: black;
             white-space: pre-line;
             overflow: hidden;
@@ -111,27 +121,15 @@
             background: transparent;
         }
 
-        /* Анимация появления текста по букве */
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        .typewriter {
-            display: inline-block;
-            overflow: hidden;
-            animation: typewriter 5s steps(60) forwards;
-        }
-
         /* Анимации */
         @keyframes float {
             0% { transform: translateY(0px); }
-            100% { transform: translateY(-10px); } /* Уменьшенная амплитуда */
+            100% { transform: translateY(-10px); }
         }
 
         @keyframes levitateHeart {
             0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); } /* Уменьшенная амплитуда */
+            50% { transform: translateY(-10px); }
             100% { transform: translateY(0); }
         }
     </style>
@@ -154,11 +152,7 @@
         <div class="slide" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('gif1.gif');"></div>
             <div class="dialog-box">
-                <div class="pixel-text">
-                    <div class="typewriter">О! Это ты суперлюксовая межгалактическая кисонька?
-Я как раз тебя и ждала! Дай мне секундочку 
-из цветка вылезти</div>
-                </div>
+                <div class="pixel-text" id="text1"></div>
             </div>
         </div>
 
@@ -166,9 +160,7 @@
         <div class="slide" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('gif2.gif');"></div>
             <div class="dialog-box">
-                <div class="pixel-text">
-                    <div class="typewriter">Ох! Неужели и этот день настал?? С праздником тебя ненаглядная!</div>
-                </div>
+                <div class="pixel-text" id="text2"></div>
             </div>
         </div>
 
@@ -176,88 +168,56 @@
         <div class="slide" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('gif3.gif');"></div>
             <div class="dialog-box">
-                <div class="pixel-text">
-                    <div class="typewriter">Мой создатель хотел тебе кое-что сказать… для этого
-                         нужно пройти небольшую мини игру!
-                    </div>
-                </div>
+                <div class="pixel-text" id="text3"></div>
             </div>
         </div>
         <div class="slide" id="heart-slide">
             <div class="dialog-box">
-                <div class="pixel-text">
-                    <div class="typewriter">Собери их все!
-                    </div>
-                </div>
+                <div class="pixel-text" id="text4"></div>
             </div>
         </div>
         <div class="slide" onclick="nextSlide()">
             <div class="dialog-box2">
-                <div class="pixel-text">
-                    <div class="typewriter">Хих! Ты справилась, оставлю вас вдвоём на секундочку </div>
-                </div>
+                <div class="pixel-text" id="text5"></div>
             </div>
         </div>
         <!-- Слайды с me.gif и dialog-box3 справа -->
         <div class="slide right-align" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('me.gif');"></div>
             <div class="dialog-box3">
-                <div class="pixel-text">
-                    <div class="typewriter">Здраствуй! Моя лучезарная и ненаглядная, Софа!
-                    </div>
-                </div>
+                <div class="pixel-text" id="text6"></div>
             </div>
         </div>
         <div class="slide right-align" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('me.gif');"></div>
             <div class="dialog-box3">
-                <div class="pixel-text">
-                    <div class="typewriter">Вот мы с тобой уже знакомы 210 дней, вот ты уже снишься 
-                        мне почти каждый день и твой лик запечатан в моих фантазиях
-                    </div>
-                </div>
+                <div class="pixel-text" id="text7"></div>
             </div>
         </div>
         <div class="slide right-align" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('me.gif');"></div>
             <div class="dialog-box3">
-                <div class="pixel-text">
-                    <div class="typewriter">Бесконечно люблю тебя и мечтаю о встрече... раз о ней заговорили 
-                        не забудь нажать на кнопку внизу, до скорых встреч. xoxo
-                    </div>
-                </div>
+                <div class="pixel-text" id="text8"></div>
             </div>
         </div>
         <div class="slide" onclick="nextSlide()">
             <div class="dialog-box2">
-                <div class="pixel-text">
-                    <div class="typewriter">Как же вы прекрасныыы! Хочу оставить ваши фотографии на память! 
-                        Его фото у меня уже есть, а твоего нет… Ты не против если я..?</div>
-                </div>
+                <div class="pixel-text" id="text9"></div>
             </div>
         </div>
         <div class="slide" onclick="nextSlide()">
             <div class="dialog-box2">
-                <div class="pixel-text">
-                    <div class="typewriter"> Так и знала, теперь улыбайся!  </div>
-                </div>
+                <div class="pixel-text" id="text10"></div>
             </div>
         </div>
         <div class="slide" onclick="nextSlide()">
             <div class="dialog-box2">
-                <div class="pixel-text">
-                    <div class="typewriter"> Выглядишь превосходноооо!! Покажу своему создателю пускай полюбуется, 
-                        он таааак по тебе соскучился, 
-                        ты даже не представляешь, днями напролёт о тебе говорит и говорит </div>
-                </div>
+                <div class="pixel-text" id="text11"></div>
             </div>
         </div>
         <div class="slide" onclick="nextSlide()">
             <div class="dialog-box2">
-                <div class="pixel-text">
-                    <div class="typewriter">Ладно! Мне пора растворятся и отправляться в свой прекрасный мир ноликов и единичек!
-                         Всего тебе наилучшего суперКошечка!!</div>
-                </div>
+                <div class="pixel-text" id="text12"></div>
             </div>
         </div>
         <div class="slide" onclick="nextSlide()">
@@ -274,6 +234,37 @@
         const audio = document.getElementById('bg-music');
         let collectedHearts = 0;
 
+        // Тексты для каждого слайда
+        const texts = [
+            "", // Первый слайд без текста
+            "О! Это ты суперлюксовая межгалактическая кисонька?\nЯ как раз тебя и ждала! Дай мне секундочку\nиз цветка вылезти",
+            "Ох! Неужели и этот день настал?? С праздником тебя ненаглядная!",
+            "Мой создатель хотел тебе кое-что сказать… для этого\nнужно пройти небольшую мини игру!",
+            "Собери их все!",
+            "Хих! Ты справилась, оставлю вас вдвоём на секундочку",
+            "Здраствуй! Моя лучезарная и ненаглядная, Софа!",
+            "Вот мы с тобой уже знакомы 210 дней, вот ты уже снишься\nмне почти каждый день и твой лик запечатан в моих фантазиях",
+            "Бесконечно люблю тебя и мечтаю о встрече... раз о ней заговорили\nне забудь нажать на кнопку внизу, до скорых встреч. xoxo",
+            "Как же вы прекрасныыы! Хочу оставить ваши фотографии на память!\nЕго фото у меня уже есть, а твоего нет… Ты не против если я..?",
+            "Так и знала, теперь улыбайся!",
+            "Выглядишь превосходноооо!! Покажу своему создателю пускай полюбуется,\nон таааак по тебе соскучился,\nты даже не представляешь, днями напролёт о тебе говорит и говорит",
+            "Ладно! Мне пора растворятся и отправляться в свой прекрасный мир ноликов и единичек!\nВсего тебе наилучшего суперКошечка!!"
+        ];
+
+        // Функция для анимации текста
+        function typeText(element, text, speed = 50) {
+            let index = 0;
+            element.innerHTML = ""; // Очищаем текст перед началом анимации
+            const interval = setInterval(() => {
+                if (index < text.length) {
+                    element.innerHTML += text[index];
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, speed);
+        }
+
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.classList.remove('active');
@@ -281,6 +272,12 @@
             });
             slides[index].classList.add('active');
             slides[index].style.display = 'flex';
+
+            // Запускаем анимацию текста для текущего слайда
+            const textElement = slides[index].querySelector('.pixel-text');
+            if (textElement && texts[index]) {
+                typeText(textElement, texts[index]);
+            }
 
             if (index === 4) {
                 startHeartsMovement();
@@ -320,6 +317,9 @@
             heart.style.animation = 'levitateHeart 3s infinite ease-in-out';
             return heart;
         }
+
+        // Инициализация первого слайда
+        showSlide(0);
     </script>
 </body>
 </html>
