@@ -72,6 +72,7 @@
             background-repeat: no-repeat;
             cursor: pointer;
             transition: transform 0.3s ease;
+            will-change: transform, opacity; /* Оптимизация для анимации */
         }
 
         @keyframes float {
@@ -84,7 +85,6 @@
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0); }
         }
-
     </style>
 </head>
 <body>
@@ -109,7 +109,7 @@
             <div class="cat" style="top: 90%; left: 60%; background-image: url('cat9.gif');"></div>
         </div>
         <div class="slide" id="heart-slide">Собери 6 штук!</div>
-        <div class="slide">Ты справилась!</div>
+        <div class="slide" onclick="nextSlide()">Ты справилась!</div>
         <div class="slide" onclick="nextSlide()">Наша любовь - самое ценное, что у меня есть 💞</div>
         <div class="slide" onclick="nextSlide()">С тобой всегда тепло и уютно ❤️</div>
     </div>
@@ -135,22 +135,23 @@
             if (currentSlide === 0) {
                 audio.play().catch(error => console.log('Автозапуск музыки запрещен браузером'));
             }
-            if (currentSlide !== 4) {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            }
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
         }
 
         function startHeartsMovement() {
             collectedHearts = 0;
             const heartSlide = slides[4];
             heartSlide.innerHTML = 'Собери 6 штук!';
-            for (let i = 0; i < 8; i++) {
-                createLevitateHeart(heartSlide);
+            const fragment = document.createDocumentFragment(); // Используем DocumentFragment для оптимизации
+            for (let i = 0; i < 6; i++) { // Уменьшили количество сердечек до 6
+                const heart = createLevitateHeart();
+                fragment.appendChild(heart);
             }
+            heartSlide.appendChild(fragment);
         }
 
-        function createLevitateHeart(parent) {
+        function createLevitateHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.style.left = Math.random() * (window.innerWidth - 40) + 'px';
@@ -159,17 +160,15 @@
                 heart.remove();
                 collectedHearts++;
                 if (collectedHearts >= 6) {
-                    currentSlide++;
-                    showSlide(currentSlide);
+                    nextSlide();
                 }
             };
-            parent.appendChild(heart);
             heart.style.animation = 'levitateHeart 3s infinite ease-in-out';
+            return heart;
         }
     </script>
 </body>
 </html>
-
 
 
 
