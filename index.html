@@ -80,10 +80,6 @@
             font-size: 16px; /* Размер текста */
             color: black; /* Черный текст */
             text-shadow: 2px 2px 0 white; /* Белая тень для читаемости */
-            position: absolute;
-            top: 10%; /* Позиция над гифкой */
-            left: 50%;
-            transform: translateX(-50%);
             white-space: pre-line; /* Поддержка переноса строк */
             overflow: hidden; /* Скрываем текст до анимации */
             padding: 10px; /* Отступы */
@@ -105,11 +101,10 @@
         /* Контейнер для диалогового окна */
         .dialog-box {
             position: absolute;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 400px; /* Ширина диалогового окна */
-            height: 150px; /* Высота диалогового окна */
+            top: 5%; /* Смещение вверх */
+            left: 20%; /* Смещение влево */
+            width: 500px; /* Увеличенная ширина диалогового окна */
+            height: 200px; /* Увеличенная высота диалогового окна */
             background-image: url('dialog-box.png'); /* Фон диалогового окна */
             background-size: cover;
             background-repeat: no-repeat;
@@ -235,5 +230,4 @@
     </script>
 </body>
 </html>
-
 
