@@ -79,7 +79,7 @@
             font-family: 'Press Start 2P', cursive; /* Пиксельный шрифт */
             font-size: 9px; /* Размер текста */
             color: black; /* Черный текст */
-            text-shadow: 2px 2px 0 white; /* Белая тень для читаемости */
+            /*text-shadow: 2px 2px 0 white; /* Белая тень для читаемости */
             white-space: pre-line; /* Поддержка переноса строк */
             overflow: hidden; /* Скрываем текст до анимации */
             padding: 6px; /* Отступы */
@@ -121,6 +121,21 @@
             width: 450px;
             height: auto;
             background-image: url('dialog-box2.png'); /* Можно использовать другое изображение */
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .dialog-box3 {
+            position: absolute;
+            top: 20%;
+            left: 15%;
+            width: 450px;
+            height: auto;
+            background-image: url('dialog-box3.png'); /* Можно использовать другое изображение */
             background-size: 100% 100%;
             background-repeat: no-repeat;
             display: flex;
@@ -231,6 +246,12 @@
                 </div>
             </div>
         </div>
+        <div class="slide" onclick="nextSlide()">
+            <div class="center-image" style="background-image: url('preLast.gif');"></div>
+        </div>
+            <div class="slide" onclick="nextSlide()">
+                <div class="center-image" style="background-image: url('last.gif');"></div>
+            </div>
     </div>
 
     <script>
