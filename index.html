@@ -78,18 +78,16 @@
         .pixel-text {
             font-family: 'Press Start 2P', cursive; /* Пиксельный шрифт */
             font-size: 16px; /* Размер текста */
-            color: white; /* Цвет текста */
-            text-shadow: 2px 2px 0 black; /* Тень для эффекта пиксельности */
+            color: black; /* Черный текст */
+            text-shadow: 2px 2px 0 white; /* Белая тень для читаемости */
             position: absolute;
             top: 10%; /* Позиция над гифкой */
             left: 50%;
             transform: translateX(-50%);
-            white-space: nowrap; /* Текст в одну строку */
+            white-space: pre-line; /* Поддержка переноса строк */
             overflow: hidden; /* Скрываем текст до анимации */
-            border: 4px solid black; /* Рамка */
-            background: rgba(0, 0, 0, 0.8); /* Фон */
             padding: 10px; /* Отступы */
-            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5); /* Тень */
+            background: transparent; /* Прозрачный фон */
         }
 
         /* Анимация появления текста по букве */
@@ -102,6 +100,24 @@
             display: inline-block;
             overflow: hidden;
             animation: typewriter 5s steps(60) forwards; /* Анимация на 5 секунд */
+        }
+
+        /* Контейнер для диалогового окна */
+        .dialog-box {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px; /* Ширина диалогового окна */
+            height: 150px; /* Высота диалогового окна */
+            background-image: url('dialog-box.png'); /* Фон диалогового окна */
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         @keyframes float {
@@ -133,8 +149,11 @@
         <!-- Второй слайд: гифка с текстом -->
         <div class="slide" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('gif1.gif');"></div>
-            <div class="pixel-text">
-                <div class="typewriter">О! Это ты суперлюксовая межгалактическая кисонька? Я как раз тебя и ждала! Дай мне секундочку из цветка вылезти</div>
+            <div class="dialog-box">
+                <div class="pixel-text">
+                    <div class="typewriter">О! Это ты суперлюксовая межгалактическая кисонька?
+Я как раз тебя и ждала! Дай мне секундочку из цветка вылезти</div>
+                </div>
             </div>
         </div>
 
@@ -216,6 +235,5 @@
     </script>
 </body>
 </html>
-
 
 
