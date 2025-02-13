@@ -114,7 +114,21 @@
             padding: 10px;
             box-sizing: border-box;
         }
-
+        .dialog-box2 {
+            position: absolute;
+            top: 20%;
+            left: 15%;
+            width: 450px;
+            height: auto;
+            background-image: url('dialog-box2.png'); /* Можно использовать другое изображение */
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
         @keyframes float {
             0% { transform: translateY(0px); }
             100% { transform: translateY(-20px); }
@@ -176,13 +190,35 @@
         <div class="slide" id="heart-slide">
             <div class="dialog-box">
                 <div class="pixel-text">
-                    <div class="typewriter">Собери их все!</div>
+                    <div class="typewriter">Собери их все!
+                    </div>
                 </div>
             </div>
         </div>
         <div class="slide" onclick="nextSlide()">Ты справилась!</div>
         <div class="slide" onclick="nextSlide()">Наша любовь - самое ценное, что у меня есть 💞</div>
         <div class="slide" onclick="nextSlide()">С тобой всегда тепло и уютно ❤️</div>
+        <div class="slide" onclick="nextSlide()">
+            <div class="dialog-box2">
+                <div class="pixel-text">
+                    <div class="typewriter">Ты делаешь мою жизнь светлее каждый день!</div>
+                </div>
+            </div>
+        </div>
+        <div class="slide" onclick="nextSlide()">
+            <div class="dialog-box2">
+                <div class="pixel-text">
+                    <div class="typewriter">Спасибо за все моменты счастья, что мы пережили вместе!</div>
+                </div>
+            </div>
+        </div>
+        <div class="slide" onclick="nextSlide()">
+            <div class="dialog-box2">
+                <div class="pixel-text">
+                    <div class="typewriter">Я тебя люблю больше, чем можно выразить словами ❤️</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -213,7 +249,7 @@
         function startHeartsMovement() {
             collectedHearts = 0;
             const heartSlide = slides[4];
-            heartSlide.innerHTML = 'Собери 6 штук!';
+            heartSlide.innerHTML = 'Коснись их всех!';
             const fragment = document.createDocumentFragment();
             for (let i = 0; i < 6; i++) {
                 const heart = createLevitateHeart();
