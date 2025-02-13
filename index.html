@@ -63,15 +63,30 @@
             animation: float 3s ease-in-out infinite alternate;
         }
 
+        .heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-image: url('heart.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
         @keyframes float {
             0% { transform: translateY(0px); }
             100% { transform: translateY(-20px); }
+        }
+
+        @keyframes fall {
+            from { transform: translateY(-50px); }
+            to { transform: translateY(100vh); }
         }
     </style>
 </head>
 <body>
     <audio id="bg-music" loop>
-        <source src="forSofa.mp3" type="audio/mpeg">
+        <source src="music.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает аудио элемент.
     </audio>
     
@@ -90,8 +105,8 @@
             <div class="cat" style="top: 50%; left: 5%; background-image: url('cat8.gif');"></div>
             <div class="cat" style="top: 90%; left: 60%; background-image: url('cat9.gif');"></div>
         </div>
-        <div class="slide">Я благодарен(а) за тебя 💖</div>
-        <div class="slide">Ты - моя мечта, ставшая реальностью 🌠</div>
+        <div class="slide" id="heart-slide">Собери 6 штук!</div>
+        <div class="slide">Ты справилась!</div>
         <div class="slide">Наша любовь - самое ценное, что у меня есть 💞</div>
         <div class="slide">С тобой всегда тепло и уютно ❤️</div>
     </div>
@@ -100,24 +115,55 @@
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const audio = document.getElementById('bg-music');
+        let heartsCollected = 0;
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.classList.remove('active');
             });
             slides[index].classList.add('active');
+
+            if (index === 4) {
+                startHeartsFalling();
+            }
         }
-        
+
         function nextSlide() {
             if (currentSlide === 0) {
                 audio.play().catch(error => console.log('Автозапуск музыки запрещен браузером'));
             }
+            if (currentSlide === 4 && heartsCollected < 6) return;
+
             currentSlide = (currentSlide + 1) % slides.length;
             showSlide(currentSlide);
         }
-        
-        showSlide(currentSlide);
+
+        function startHeartsFalling() {
+            heartsCollected = 0;
+            for (let i = 0; i < 12; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = '-50px';
+            heart.style.animation = `fall ${Math.random() * 4 + 3}s linear forwards`;
+
+            heart.addEventListener('click', () => {
+                heart.remove();
+                heartsCollected++;
+                if (heartsCollected >= 6) {
+                    nextSlide();
+                }
+            });
+
+            document.body.appendChild(heart);
+        }
     </script>
 </body>
 </html>
+
 
