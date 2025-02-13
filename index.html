@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Валентинка">
+    <meta name="apple-mobile-web-app-title" content="Я люблю Софу Пашкевич">
     <link rel="apple-touch-icon" href="icon.png">
     <title>Валентинка</title>
     <style>
@@ -71,7 +71,6 @@
             background-size: contain;
             background-repeat: no-repeat;
             cursor: pointer;
-            transition: transform 0.3s ease;
         }
 
         @keyframes float {
@@ -79,10 +78,6 @@
             100% { transform: translateY(-20px); }
         }
 
-        @keyframes move {
-            0% { transform: translateY(-50px); }
-            100% { transform: translateY(100vh); }
-        }
     </style>
 </head>
 <body>
@@ -116,6 +111,7 @@
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const audio = document.getElementById('bg-music');
+        let collectedHearts = 0;
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -137,22 +133,33 @@
         }
 
         function startHeartsMoving() {
+            collectedHearts = 0;
+            const heartSlide = slides[4];
             for (let i = 0; i < 8; i++) {
-                createHeart();
+                createMovingHeart(heartSlide);
             }
         }
 
-        function createHeart() {
+        function createMovingHeart(parent) {
             const heart = document.createElement('div');
             heart.classList.add('heart');
-            heart.style.left = Math.random() * window.innerWidth + 'px';
-            heart.style.top = Math.random() * window.innerHeight + 'px';
+            heart.style.left = Math.random() * (window.innerWidth - 40) + 'px';
+            heart.style.top = Math.random() * (window.innerHeight - 40) + 'px';
 
-            document.body.appendChild(heart);
+            heart.addEventListener('click', () => {
+                heart.remove();
+                collectedHearts++;
+                if (collectedHearts >= 6) {
+                    nextSlide();
+                }
+            });
+
+            parent.appendChild(heart);
         }
     </script>
 </body>
 </html>
+
 
 
 
