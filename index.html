@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Я люблю Софу Пашкевич">
+    <meta name="apple-mobile-web-app-title" content="Валентинка">
     <link rel="apple-touch-icon" href="icon.png">
     <title>Валентинка</title>
     <style>
@@ -71,11 +71,17 @@
             background-size: contain;
             background-repeat: no-repeat;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
         @keyframes float {
             0% { transform: translateY(0px); }
             100% { transform: translateY(-20px); }
+        }
+
+        @keyframes moveHeart {
+            0% { transform: translateY(-50px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
         }
 
     </style>
@@ -86,11 +92,11 @@
         Ваш браузер не поддерживает аудио элемент.
     </audio>
     
-    <div class="slider" onclick="nextSlide()">
-        <div class="slide active"><div class="krishna" style="background-image: url('krishna1.gif');"></div>С Днём Святого Валентина!</div>
-        <div class="slide"><div class="krishna" style="background-image: url('krishna2.gif');"></div>Ты - моё счастье ❤️</div>
-        <div class="slide"><div class="krishna" style="background-image: url('krishna3.gif');"></div>Каждый день с тобой - волшебство ✨</div>
-        <div class="slide">Ты - моя вселенная 🌍
+    <div class="slider">
+        <div class="slide active" onclick="nextSlide()"><div class="krishna" style="background-image: url('krishna1.gif');"></div>С Днём Святого Валентина!</div>
+        <div class="slide" onclick="nextSlide()"><div class="krishna" style="background-image: url('krishna2.gif');"></div>Ты - моё счастье ❤️</div>
+        <div class="slide" onclick="nextSlide()"><div class="krishna" style="background-image: url('krishna3.gif');"></div>Каждый день с тобой - волшебство ✨</div>
+        <div class="slide" onclick="nextSlide()">Ты - моя вселенная 🌍
             <div class="cat" style="top: 5%; left: 10%; background-image: url('cat1.gif');"></div>
             <div class="cat" style="top: 15%; left: 80%; background-image: url('cat2.gif');"></div>
             <div class="cat" style="top: 40%; left: 20%; background-image: url('cat3.gif');"></div>
@@ -102,9 +108,9 @@
             <div class="cat" style="top: 90%; left: 60%; background-image: url('cat9.gif');"></div>
         </div>
         <div class="slide" id="heart-slide">Собери 6 штук!</div>
-        <div class="slide">Ты справилась!</div>
-        <div class="slide">Наша любовь - самое ценное, что у меня есть 💞</div>
-        <div class="slide">С тобой всегда тепло и уютно ❤️</div>
+        <div class="slide" onclick="nextSlide()">Ты справилась!</div>
+        <div class="slide" onclick="nextSlide()">Наша любовь - самое ценное, что у меня есть 💞</div>
+        <div class="slide" onclick="nextSlide()">С тобой всегда тепло и уютно ❤️</div>
     </div>
 
     <script>
@@ -128,8 +134,10 @@
             if (currentSlide === 0) {
                 audio.play().catch(error => console.log('Автозапуск музыки запрещен браузером'));
             }
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
+            if (currentSlide !== 4) {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
         }
 
         function startHeartsMoving() {
@@ -144,21 +152,31 @@
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.style.left = Math.random() * (window.innerWidth - 40) + 'px';
-            heart.style.top = Math.random() * (window.innerHeight - 40) + 'px';
+            heart.style.top = '-50px';
 
             heart.addEventListener('click', () => {
                 heart.remove();
                 collectedHearts++;
                 if (collectedHearts >= 6) {
-                    nextSlide();
+                    currentSlide++;
+                    showSlide(currentSlide);
                 }
             });
 
             parent.appendChild(heart);
+
+            heart.animate(
+                [
+                    { transform: 'translateY(-50px)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px)`, opacity: 0 }
+                ],
+                { duration: 8000, iterations: Infinity }
+            );
         }
     </script>
 </body>
 </html>
+
 
 
 
