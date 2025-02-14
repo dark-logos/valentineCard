@@ -48,12 +48,14 @@
         .slide:not(.right-align) {
             justify-content: flex-start;
             align-items: flex-start;
+            transform: translateY(20px);
         }
 
         /* Слайды с гифками справа */
         .slide.right-align {
             justify-content: flex-end;
             align-items: flex-end;
+            transform: translateY(-20px);
         }
 
         .center-image {
@@ -202,27 +204,25 @@
             </div>
         </div>
         <div class="slide" onclick="nextSlide()">
-            <div class="center-image">
-                <img src="gif2.gif" alt="gif2" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
+            <div class="center-image" style="background-image: url('gif4.gif');"></div>
             <div class="dialog-box2">
                 <div class="pixel-text" id="text9"></div>
             </div>
         </div>
-        
         <div class="slide" onclick="nextSlide()">
-            <div class="center-image" style="background-image: url('gif2.gif');"></div>
+            <div class="center-image" style="background-image: url('gif5.gif');"></div>
             <div class="dialog-box2">
                 <div class="pixel-text" id="text10"></div>
             </div>
         </div>
         <div class="slide" onclick="nextSlide()">
-            <div class="center-image" style="background-image: url('gif2.gif');"></div>
+            <div class="center-image" style="background-image: url('gif6.gif');"></div>
             <div class="dialog-box2">
                 <div class="pixel-text" id="text11"></div>
             </div>
         </div>
         <div class="slide" onclick="nextSlide()">
+            <div class="center-image" style="background-image: url('gif3.gif');"></div>
             <div class="dialog-box2">
                 <div class="pixel-text" id="text12"></div>
             </div>
