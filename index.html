@@ -269,16 +269,7 @@
         }
 
         // Добавляем секретную кнопку в виде гифки на 8 слайд
-        const secretButton = document.createElement('img');
-        secretButton.src = 'secret-button.gif'; // путь к твоей гифке
-        secretButton.alt = 'Секретная кнопка';
-        secretButton.style.position = 'absolute';
-        secretButton.style.bottom = '20px';
-        secretButton.style.right = '20px';
-        secretButton.style.width = '80px';
-        secretButton.style.height = '80px';
-        secretButton.style.cursor = 'pointer';
-        secretButton.onclick = showSecretSlide;
+        
 
         slides[8].appendChild(secretButton);
         // Функция для анимации текста
