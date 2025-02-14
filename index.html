@@ -48,15 +48,12 @@
         .slide:not(.right-align) {
             justify-content: flex-start;
             align-items: flex-start;
-            /*transform: translateY(200px);*/
-            margin-top: 400px;
         }
 
         /* Слайды с гифками справа */
         .slide.right-align {
             justify-content: flex-end;
             align-items: flex-end;
-            /*transform: translateY(-200px);*/
         }
 
         .center-image {
@@ -69,7 +66,10 @@
 
         /* Для слайдов с выравниванием справа */
         .slide.right-align .center-image {
-            background-position: right bottom;
+            margin-bottom: 300px;
+        }
+        .slide:not(.right-align) .center-image {
+             margin-top: 300px; /* опустит гифку */
         }
         .heart {
             position: absolute;
