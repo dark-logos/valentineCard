@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Валентинка">
+    <meta name="apple-mobile-web-app-title" content="Я люблю Софу Пашкевич">
     <link rel="apple-touch-icon" href="icon.png">
-    <title>Валентинка</title>
+    <title>Я люблю Софу Пашкевич</title>
     <style>
         /* Общие стили */
         body {
@@ -50,7 +50,6 @@
             align-items: flex-start;
         }
 
-        /* Слайды с гифками справа */
         .slide.right-align {
             justify-content: flex-end;
             align-items: flex-end;
@@ -69,7 +68,7 @@
             margin-bottom: 300px;
         }
         .slide:not(.right-align) .center-image {
-             margin-top: 300px; /* опустит гифку */
+            margin-top: 150px; 
         }
         .heart {
             position: absolute;
@@ -234,6 +233,13 @@
         <div class="slide" onclick="nextSlide()">
             <div class="center-image" style="background-image: url('last.gif');"></div>
         </div>
+        <div class="slide" id="secret-slide">
+            <div class="dialog-box">
+                <div class="pixel-text">Ты согласна быть моей валентинкой?</div>
+                <button onclick="alert('Ура! Я самый счастливый человек!')">Да</button>
+                <button onclick="alert('Я знал, что ты скажешь да!')">Да</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -251,14 +257,31 @@
             "Собери их все!",
             "Хих! Ты справилась, оставлю вас вдвоём на секундочку",
             "Здраствуй! Моя лучезарная и ненаглядная, Софа!",
-            "Вот мы с тобой уже знакомы 210 дней, вот ты уже снишься\nмне почти каждый день и твой лик запечатан в моих фантазиях",
+            "Вот мы с тобой уже знакомы 210 дней, вот ты уже снишься\nмне каждый день и твой лик запечатан в моих фантазиях",
             "Бесконечно люблю тебя и мечтаю о встрече... раз о ней заговорили\nне забудь нажать на кнопку внизу, до скорых встреч. xoxo",
-            "Как же вы прекрасныыы! Хочу оставить ваши фотографии на память!\nЕго фото у меня уже есть, а твоего нет… Ты не против если я..?",
+            "Как же вы прекрасныыы! Хочу оставить ваши фотографии на память!\nЕго фото у меня уже есть, а твоей нет… Ты не против если я..?",
             "Так и знала, теперь улыбайся!",
-            "Выглядишь превосходноооо!! Покажу своему создателю пускай полюбуется,\nон таааак по тебе соскучился,\nты даже не представляешь, днями напролёт о тебе говорит и говорит",
+            "Выглядишь превосходноооо!! Покажу своему создателю пускай полюбуется,\nон таааак по тебе соскучился,\nты даже не представляешь, днями напролёт о тебе только говорит и говорит",
             "Ладно! Мне пора растворятся и отправляться в свой прекрасный мир ноликов и единичек!\nВсего тебе наилучшего суперКошечка!!"
         ];
+                function showSecretSlide() {
+            currentSlide = slides.length - 1; // Индекс секретного слайда
+            showSlide(currentSlide);
+        }
 
+        // Добавляем секретную кнопку в виде гифки на 8 слайд
+        const secretButton = document.createElement('img');
+        secretButton.src = 'secret-button.gif'; // путь к твоей гифке
+        secretButton.alt = 'Секретная кнопка';
+        secretButton.style.position = 'absolute';
+        secretButton.style.bottom = '20px';
+        secretButton.style.right = '20px';
+        secretButton.style.width = '80px';
+        secretButton.style.height = '80px';
+        secretButton.style.cursor = 'pointer';
+        secretButton.onclick = showSecretSlide;
+
+        slides[8].appendChild(secretButton);
         // Функция для анимации текста
         function typeText(element, text, speed = 50) {
             let index = 0;
